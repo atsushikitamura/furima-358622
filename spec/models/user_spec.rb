@@ -106,8 +106,14 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Family name is invalid. Input full-width characters')
       end
       it 'family_name、firast_nameが英字だと登録できない' do
-        @user.family_name = 'a'
-        @user.first_name = 'a'
+        @user.family_name = 'w'
+        @user.first_name = 'w'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Family name is invalid. Input full-width characters')
+      end
+      it 'family_name、firast_nameが数字だと登録できない' do
+        @user.family_name = '１'
+        @user.first_name = '１'
         @user.valid?
         expect(@user.errors.full_messages).to include('Family name is invalid. Input full-width characters')
       end
@@ -140,8 +146,14 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Family name reading is invalid. Input full-width katakana')
       end
       it 'family_name_reading、first_name_readingが英字だと登録できない' do
-        @user.family_name_reading = 'a'
-        @user.first_name_reading = 'a'
+        @user.family_name_reading = 't'
+        @user.first_name_reading = 't'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Family name reading is invalid. Input full-width katakana')
+      end
+      it 'family_name_reading、first_name_readingが数字だと登録できない' do
+        @user.family_name_reading = '２'
+        @user.first_name_reading = '２'
         @user.valid?
         expect(@user.errors.full_messages).to include('Family name reading is invalid. Input full-width katakana')
       end
