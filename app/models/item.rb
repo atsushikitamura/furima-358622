@@ -18,6 +18,6 @@ class Item < ApplicationRecord
     validates :category_id, :status_id, :delivery_fee_id, :prefecture_id, :delivery_period_id
   end
 
-  validates :price, numericality: { in: 300..9999999, message: 'is out of setting range' }
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'is out of setting range' }
   validates :price, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width number' }
 end
