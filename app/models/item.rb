@@ -19,5 +19,10 @@ class Item < ApplicationRecord
 
   validates :price,
             numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'is out of setting range' }
-  validates :price, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width number' }
+  validates :price, numericality: { only_integer: true, message: 'is invalid. Input half-width number' }
+  # ⭕️only_integer: true は全角数字を弾く役割もある(おそらく、数字かどうかを判断するnumericalityの働きも加わっている)
 end
+
+# ⭕️validates :price, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width number' }
+# テーブルにinteger型を指定したことと、ActiveRecordの働きの関係で、上記の記述だと半角数字で入力された部分にのみバリデーションがかかり、DBに保存されてしまう
+# 全て全角数字で入力した場合は、0に置き換えて保存される仕組み。
