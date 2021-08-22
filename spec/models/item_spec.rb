@@ -19,11 +19,11 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it 'priceの値が300~9,999,999の間であれば保存できる' do
-        @item.price = 647382
+        @item.price = 647_382
         expect(@item).to be_valid
       end
       it 'priceが半角数字であれば保存できる' do
-        @item.price = 192836
+        @item.price = 192_836
         expect(@item).to be_valid
       end
     end
@@ -85,27 +85,27 @@ RSpec.describe Item, type: :model do
       it 'priceの値が299以下だと保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it 'priceの値が10,000,000以上だと保存できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it 'priceが全角だと保存できない' do
         @item.price = '１２３４５'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width number")
+        expect(@item.errors.full_messages).to include('Price is invalid. Input half-width number')
       end
       it 'priceが数字以外だと登録できない(半角英字・半角カナ)' do
         @item.price = 'aｱ'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width number")
+        expect(@item.errors.full_messages).to include('Price is invalid. Input half-width number')
       end
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
