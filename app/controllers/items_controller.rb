@@ -37,9 +37,7 @@ class ItemsController < ApplicationController
 
   def destroy
     item = Item.find(params[:id])
-    if item.destroy
-      redirect_to root_path
-    end
+    redirect_to root_path if item.destroy
   end
 
   private
@@ -53,10 +51,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  # 上記のようにset_itemを定義しないと、@itemが空になりエラーが発生
   def move_to_index
-    unless current_user == @item.user #上記のようにset_itemを定義しないと、@itemが空になりエラーが発生
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user != @item.user || current_user == @item.user && @item.order
   end
-
 end
