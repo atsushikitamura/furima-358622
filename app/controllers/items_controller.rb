@@ -53,8 +53,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index
-    unless current_user == @item.user #上記のようにset_itemを定義しないと、@itemが空になりエラーが発生
+  def move_to_index #上記のようにset_itemを定義しないと、@itemが空になりエラーが発生
+    if current_user != @item.user || current_user == @item.user && @item.order
       redirect_to root_path
     end
   end
