@@ -41,17 +41,17 @@ RSpec.describe OrderAddress, type: :model do
       it 'postal_codeが全角だと購入できない' do
         @order_address.postal_code = '１２３ー４５６７'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
       it 'postal_codeにハイフンが含まれない場合購入できない' do
         @order_address.postal_code = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
       it 'postal_codeが3文字+4文字でないと購入できない' do
         @order_address.postal_code = '12-34567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@order_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
       it 'prefecture_idが1では購入できない' do
         @order_address.prefecture_id = 1
@@ -76,12 +76,12 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが9文字以下だと購入できない' do
         @order_address.phone_number = '123456789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is too short")
+        expect(@order_address.errors.full_messages).to include('Phone number is too short')
       end
       it 'phone_numberが全角だと購入できない' do
         @order_address.phone_number = '０１２３４５６７８９'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
       it 'user_idが空では購入できない' do
         @order_address.user_id = ''
